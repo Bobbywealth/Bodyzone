@@ -84,7 +84,7 @@ export default function BodyZone() {
       {/* Hero Section with Background Image */}
       <section 
         id="home"
-        className="relative mt-20 min-h-[90vh] flex flex-col justify-center items-center px-8 py-16 overflow-hidden"
+        className="relative mt-20 min-h-[80vh] flex flex-col justify-center items-center px-8 py-16 overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 50%, #e0e0e0 100%)'
         }}
@@ -123,8 +123,11 @@ export default function BodyZone() {
           </div>
         </div>
 
-        {/* Products Section - Overlayed on Hero */}
-        <div className="relative z-10 flex justify-center gap-8 flex-wrap px-16 pb-16">
+      </section>
+
+      {/* Products Section */}
+      <section id="shop" className="relative z-10 flex justify-center px-16 py-16 bg-white">
+        <div className="flex w-full max-w-6xl justify-center gap-8 flex-wrap">
           {[
             { name: 'ultimate greens\n+antioxidants', subtitle: 'MIXED BERRY', detail: 'OVER 50 INGREDIENTS\nFOR HEALTHY LIVING', hasScoop: true, hasGreen: true },
             { name: 'ultimate\ncleanse', subtitle: 'PREMIUM QUALITY\n15 DAY CLEANSE', detail: 'DIETARY SUPPLEMENT', hasScoop: false },
