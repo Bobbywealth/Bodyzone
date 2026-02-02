@@ -1,5 +1,4 @@
-<.hero-buttons
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -110,15 +109,39 @@
             white-space: nowrap;
         }
 
-        .cart-icon {
+        .cart-icon-wrapper {
             cursor: pointer;
             transition: transform 0.3s ease;
             position: absolute;
             right: 4rem;
+            display: flex;
+            align-items: center;
         }
 
-        .cart-icon:hover {
+        .cart-icon-wrapper:hover {
             transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--gold);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-count.show {
+            opacity: 1;
         }
 
         /* Hero Section */
@@ -172,7 +195,7 @@
             width: 100%;
             height: 100%;
             opacity: 0.1;
- .hero-buttons {}margin-bottom: 2rem;           z-index: 2;
+            z-index: 2;
         }
 
         .gym-frame {
@@ -372,6 +395,314 @@
         .product-container {
             position: relative;
             width: 100%;
+        }
+
+        /* Quantity Controls & Add to Cart */
+        .product-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-controls .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--gray-light);
+            background: var(--white);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            color: var(--gray-dark);
+        }
+
+        .quantity-controls .qty-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .quantity-controls .qty-value {
+            width: 40px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .add-to-cart-btn {
+            padding: 0.75rem 2rem;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 160, 99, 0.3);
+        }
+
+        .add-to-cart-btn.added {
+            background: #27ae60;
+        }
+
+        /* Shopping Cart Sidebar */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .cart-header h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-mid);
+            transition: color 0.3s ease;
+            padding: 0.5rem;
+        }
+
+        .cart-close:hover {
+            color: var(--gold);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            animation: fadeInUp 0.3s ease-out;
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+            background: var(--gray-light);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.95rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cart-item-controls .qty-btn {
+            width: 28px;
+            height: 28px;
+            border: 1px solid var(--gray-light);
+            background: var(--white);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item-controls .qty-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .cart-item-controls .qty-value {
+            width: 40px;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: var(--gray-mid);
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-left: auto;
+            transition: color 0.2s ease;
+        }
+
+        .cart-item-remove:hover {
+            color: #e74c3c;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--gray-mid);
+        }
+
+        .cart-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-light);
+            background: var(--cream);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-total-label {
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+        }
+
+        .cart-total-value {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(201, 160, 99, 0.3);
+        }
+
+        .checkout-btn:disabled {
+            background: var(--gray-light);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Added to Cart Toast */
+        .added-toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            box-shadow: 0 5px 20px rgba(39, 174, 96, 0.3);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .added-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
         }
 
         /* Product Details Section */
@@ -614,7 +945,7 @@
                 justify-content: center;
             }
 
-            .cart-icon {
+            .cart-icon-wrapper {
                 top: 1rem;
                 right: 2rem;
             }
@@ -672,6 +1003,253 @@
                 display: none;
             }
         }
+
+        /* Studios Section */
+        .studios-section {
+            padding: 6rem 4rem;
+            background: var(--white);
+        }
+
+        .studios-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .studios-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .studios-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .studios-header p {
+            color: var(--gray-mid);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .studios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .studio-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .studio-card:nth-child(1) { animation-delay: 0.1s; }
+        .studio-card:nth-child(2) { animation-delay: 0.2s; }
+        .studio-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .studio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(201, 160, 99, 0.2);
+        }
+
+        .studio-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--white);
+        }
+
+        .studio-content {
+            padding: 2rem;
+        }
+
+        .studio-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gray-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .studio-content .location {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .studio-content p {
+            color: var(--gray-mid);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .studio-btn {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .studio-btn:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        @media (max-width: 768px) {
+            .studios-section {
+                padding: 4rem 2rem;
+            }
+
+            .studios-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .studios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 6rem 4rem;
+            background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+        }
+
+        .testimonials-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .testimonials-header p {
+            color: var(--gray-mid);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+        .testimonial-card:nth-child(2) { animation-delay: 0.2s; }
+        .testimonial-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(201, 160, 99, 0.15);
+        }
+
+        .testimonial-rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-rating span {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .testimonial-text {
+            color: var(--gray-mid);
+            line-height: 1.8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .testimonial-info h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: var(--gold);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-section {
+                padding: 4rem 2rem;
+            }
+
+            .testimonials-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -691,15 +1269,43 @@
             <li><a href="#contact">Contact</a></li>
         </ul>
 
-        <div class="cart-icon">
+        <div class="cart-icon-wrapper" id="cartIcon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9 2L7 8H21L19 2H9Z"/>
                 <path d="M7 8H21C21.5523 8 22 8.44772 22 9V19C22 19.5523 21.5523 20 21 20H7C6.44772 20 6 19.5523 6 19V9C6 8.44772 6.44772 8 7 8Z"/>
                 <circle cx="10" cy="17" r="1"/>
                 <circle cx="18" cy="17" r="1"/>
             </svg>
+            <span class="cart-count" id="cartCount">0</span>
         </div>
     </nav>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button class="cart-close" id="cartClose">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span class="cart-total-label">Total:</span>
+                <span class="cart-total-value" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" disabled>Checkout</button>
+        </div>
+    </div>
+
+    <!-- Added to Cart Toast -->
+    <div class="added-toast" id="addedToast">✓ Added to cart!</div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -713,46 +1319,127 @@
         </div>
 
         <div class="hero-content">
-            <div class="hero-buttons">
-                <a href="#shop" class="btn">Shop Supplements</a>
-                <a href="#studios" class="btn">Explore Studios</a>
-            </div>
         </div>
     </section>
+
+    <!-- CTA Buttons -->
+    <div class="hero-buttons" style="padding: 0 2rem 4rem; text-align: center; margin-top: 2rem;">
+        <a href="#shop" class="btn">Shop Supplements</a>
+        <a href="#studios" class="btn">Explore Studios</a>
+    </div>
 
     <!-- Products -->
     <section class="products-section" id="shop">
         <div class="products">
-            <div class="product">
+            <div class="product" data-id="1" data-name="Ultimate Greens" data-price="39.99">
                 <div class="product-container">
                     <img src="Ultimategreens.PNG" alt="Ultimate Greens + Antioxidants" class="product-image">
                 </div>
                 <h3 class="product-name">Ultimate Greens</h3>
                 <p class="product-price">$39.99 USD</p>
+                <div class="product-actions">
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="changeQty(1, -1)">−</button>
+                        <span class="qty-value" id="qty-1">1</span>
+                        <button class="qty-btn" onclick="changeQty(1, 1)">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(1)">
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
+            <div class="product" data-id="2" data-name="Ultimate Cleanse" data-price="39.99">
                 <div class="product-container">
                     <img src="Ultimate Cleanse.PNG" alt="Ultimate Cleanse" class="product-image">
                 </div>
                 <h3 class="product-name">Ultimate Cleanse</h3>
                 <p class="product-price">$39.99 USD</p>
+                <div class="product-actions">
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="changeQty(2, -1)">−</button>
+                        <span class="qty-value" id="qty-2">1</span>
+                        <button class="qty-btn" onclick="changeQty(2, 1)">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(2)">
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
+            <div class="product" data-id="3" data-name="Zone Fuel" data-price="49.99">
                 <div class="product-container">
                     <img src="Zonefuel.PNG" alt="ZoneFuel Prime Hydration" class="product-image">
                 </div>
                 <h3 class="product-name">Zone Fuel</h3>
                 <p class="product-price">$49.99 USD</p>
+                <div class="product-actions">
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="changeQty(3, -1)">−</button>
+                        <span class="qty-value" id="qty-3">1</span>
+                        <button class="qty-btn" onclick="changeQty(3, 1)">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(3)">
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
             </div>
 
-            <div class="product">
+            <div class="product" data-id="4" data-name="Collagen Peptides" data-price="49.99">
                 <div class="product-container">
                     <img src="Collagen.PNG" alt="Collagen Peptides Type I & III" class="product-image">
                 </div>
                 <h3 class="product-name">Collagen Peptides</h3>
                 <p class="product-price">$49.99 USD</p>
+                <div class="product-actions">
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="changeQty(4, -1)">−</button>
+                        <span class="qty-value" id="qty-4">1</span>
+                        <button class="qty-btn" onclick="changeQty(4, 1)">+</button>
+                    </div>
+                    <button class="add-to-cart-btn" onclick="addToCart(4)">
+                        <span>Add to Cart</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studios Section -->
+    <section class="studios-section" id="studios">
+        <div class="studios-content">
+            <div class="studios-header">
+                <h2>Our Studios</h2>
+                <p>Experience world-class fitness facilities designed to elevate your performance. Each Body Zone studio offers state-of-the-art equipment, expert trainers, and an environment built for results.</p>
+            </div>
+            <div class="studios-grid">
+                <div class="studio-card">
+                    <div class="studio-image">💪</div>
+                    <div class="studio-content">
+                        <h3>Body Zone Downtown</h3>
+                        <p class="location">📍 123 Main Street, Downtown</p>
+                        <p>Our flagship location featuring premium equipment, HIIT studios, and personalized training programs.</p>
+                        <button class="studio-btn">Book a Class</button>
+                    </div>
+                </div>
+                <div class="studio-card">
+                    <div class="studio-image">🏋️</div>
+                    <div class="studio-content">
+                        <h3>Body Zone Westside</h3>
+                        <p class="location">📍 456 West Avenue, Westside</p>
+                        <p>A spacious facility focused on strength training, powerlifting, and functional fitness.</p>
+                        <button class="studio-btn">Book a Class</button>
+                    </div>
+                </div>
+                <div class="studio-card">
+                    <div class="studio-image">🧘</div>
+                    <div class="studio-content">
+                        <h3>Body Zone Wellness Center</h3>
+                        <p class="location">📍 789 Wellness Blvd, Eastside</p>
+                        <p>Our holistic wellness hub offering yoga, pilates, meditation, and recovery sessions.</p>
+                        <button class="studio-btn">Book a Class</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -842,6 +1529,101 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="testimonials-content">
+            <div class="testimonials-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real stories from real people who have transformed their wellness journey with Body Zone.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"Ultimate Greens has completely changed my morning routine. I feel more energized throughout the day and my immune system has never been stronger. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MJ</div>
+                        <div class="testimonial-info">
+                            <h4>Marcus Johnson</h4>
+                            <p>Ultimate Greens User</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"The 15-day cleanse was exactly what I needed. I feel lighter, more focused, and have established healthier eating habits that stick. Amazing product!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SC</div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Chen</h4>
+                            <p>Ultimate Cleanse User</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"ZoneFuel is my go-to during intense training sessions. No cramps, no jitters, just pure hydration and endurance. Best electrolyte supplement I've ever used."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">DR</div>
+                        <div class="testimonial-info">
+                            <h4>David Rodriguez</h4>
+                            <p>ZoneFuel User</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"Collagen Peptides has visibly improved my skin and joint health. I add it to my morning coffee and don't even taste it. Will definitely repurchase!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">EW</div>
+                        <div class="testimonial-info">
+                            <h4>Emily Watson</h4>
+                            <p>Collagen User</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"The combination of these supplements with my training has taken my performance to the next level. Body Zone products are now an essential part of my daily routine."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">JT</div>
+                        <div class="testimonial-info">
+                            <h4>James Thompson</h4>
+                            <p>Studio Member</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                    </div>
+                    <p class="testimonial-text">"Clean, effective, and great tasting. I love that there are no artificial additives. Finally a supplement brand I trust with my health."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">AP</div>
+                        <div class="testimonial-info">
+                            <h4>Aisha Patel</h4>
+                            <p>Bundle User</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section class="features" id="about">
         <div style="max-width: 900px; margin: 0 auto 4rem; text-align: center;">
@@ -919,6 +1701,26 @@
     </footer>
 
     <script>
+        // Product quantities
+        const quantities = { 1: 1, 2: 1, 3: 1, 4: 1 };
+        
+        // Cart data
+        let cart = JSON.parse(localStorage.getItem('bodyzoneCart')) || [];
+
+        // DOM Elements
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const cartClose = document.getElementById('cartClose');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const addedToast = document.getElementById('addedToast');
+
+        // Initialize cart
+        updateCartDisplay();
+
         // Navbar scroll effect
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => {
@@ -959,6 +1761,143 @@
 
         document.querySelectorAll('.feature, .product').forEach(el => {
             observer.observe(el);
+        });
+
+        // Cart functions
+        function changeQty(productId, delta) {
+            quantities[productId] = Math.max(1, quantities[productId] + delta);
+            document.getElementById(`qty-${productId}`).textContent = quantities[productId];
+        }
+
+        function addToCart(productId) {
+            const product = document.querySelector(`.product[data-id="${productId}"]`);
+            const item = {
+                id: productId,
+                name: product.dataset.name,
+                price: parseFloat(product.dataset.price),
+                quantity: quantities[productId],
+                image: product.querySelector('.product-image').src
+            };
+
+            const existingItem = cart.find(i => i.id === productId);
+            if (existingItem) {
+                existingItem.quantity += item.quantity;
+            } else {
+                cart.push(item);
+            }
+
+            saveCart();
+            updateCartDisplay();
+            showToast();
+
+            // Reset quantity to 1
+            quantities[productId] = 1;
+            document.getElementById(`qty-${productId}`).textContent = 1;
+
+            // Button feedback
+            const btn = product.querySelector('.add-to-cart-btn');
+            btn.classList.add('added');
+            btn.querySelector('span').textContent = 'Added!';
+            setTimeout(() => {
+                btn.classList.remove('added');
+                btn.querySelector('span').textContent = 'Add to Cart';
+            }, 2000);
+        }
+
+        function updateCartItemQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity = Math.max(1, item.quantity + delta);
+                if (item.quantity === 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                }
+                saveCart();
+                updateCartDisplay();
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(i => i.id !== productId);
+            saveCart();
+            updateCartDisplay();
+        }
+
+        function saveCart() {
+            localStorage.setItem('bodyzoneCart', JSON.stringify(cart));
+        }
+
+        function updateCartDisplay() {
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCount.classList.toggle('show', totalItems > 0);
+
+            // Update cart items
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="cart-empty">
+                        <div class="cart-empty-icon">🛒</div>
+                        <p>Your cart is empty</p>
+                    </div>
+                `;
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h4 class="cart-item-name">${item.name}</h4>
+                            <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                            <div class="cart-item-controls">
+                                <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, -1)">−</button>
+                                <span class="qty-value">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateCartItemQuantity(${item.id}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${item.id})">Remove</button>
+                    </div>
+                `).join('');
+            }
+
+            // Update total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+
+            // Enable/disable checkout
+            checkoutBtn.disabled = cart.length === 0;
+        }
+
+        function showToast() {
+            addedToast.classList.add('show');
+            setTimeout(() => {
+                addedToast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Cart sidebar toggle
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            cartOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        });
+
+        function closeCart() {
+            cartSidebar.classList.remove('open');
+            cartOverlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        cartClose.addEventListener('click', closeCart);
+        cartOverlay.addEventListener('click', closeCart);
+
+        // Checkout button
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length > 0) {
+                alert('Thank you for your order! This is a demo checkout.');
+                cart = [];
+                saveCart();
+                updateCartDisplay();
+                closeCart();
+            }
         });
     </script>
 </body>
