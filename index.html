@@ -325,10 +325,10 @@
             position: relative;
             z-index: 20;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -343,6 +343,7 @@
             padding: 1.5rem;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
+            min-width: 0;
         }
 
         .product:nth-child(1) { animation-delay: 0.1s; }
@@ -712,11 +713,11 @@
         }
 
         .product-detail-grid {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
         }
 
         .product-detail-card {
@@ -968,7 +969,7 @@
 
             .products {
                 padding: 2rem 1rem;
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .product-details {
@@ -976,7 +977,7 @@
             }
 
             .product-detail-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .benefits {
@@ -1001,132 +1002,6 @@
 
             .gym-frame {
                 display: none;
-            }
-        }
-
-        /* Studios Section */
-        .studios-section {
-            padding: 6rem 4rem;
-            background: var(--white);
-        }
-
-        .studios-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .studios-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .studios-header h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            color: var(--gold);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        .studios-header p {
-            color: var(--gray-mid);
-            line-height: 1.8;
-            font-size: 1.05rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .studios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .studio-card {
-            background: var(--white);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            animation: fadeInUp 0.8s ease-out backwards;
-        }
-
-        .studio-card:nth-child(1) { animation-delay: 0.1s; }
-        .studio-card:nth-child(2) { animation-delay: 0.2s; }
-        .studio-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .studio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(201, 160, 99, 0.2);
-        }
-
-        .studio-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            color: var(--white);
-        }
-
-        .studio-content {
-            padding: 2rem;
-        }
-
-        .studio-content h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            color: var(--gray-dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .studio-content .location {
-            color: var(--gold);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .studio-content p {
-            color: var(--gray-mid);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .studio-btn {
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            border-radius: 50px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .studio-btn:hover {
-            background: var(--gold);
-            color: var(--white);
-        }
-
-        @media (max-width: 768px) {
-            .studios-section {
-                padding: 4rem 2rem;
-            }
-
-            .studios-header h2 {
-                font-size: 2.5rem;
-            }
-
-            .studios-grid {
-                grid-template-columns: 1fr;
             }
         }
 
@@ -1258,7 +1133,6 @@
         <ul class="nav-links left">
             <li><a href="#home">Home</a></li>
             <li><a href="#shop">Shop</a></li>
-            <li><a href="#studios">Studios</a></li>
         </ul>
 
         <a href="#" class="logo">BODY ⟨ ZONE</a>
@@ -1325,7 +1199,6 @@
     <!-- CTA Buttons -->
     <div class="hero-buttons" style="padding: 0 2rem 4rem; text-align: center; margin-top: 2rem;">
         <a href="#shop" class="btn">Shop Supplements</a>
-        <a href="#studios" class="btn">Explore Studios</a>
     </div>
 
     <!-- Products -->
@@ -1400,45 +1273,6 @@
                     <button class="add-to-cart-btn" onclick="addToCart(4)">
                         <span>Add to Cart</span>
                     </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Studios Section -->
-    <section class="studios-section" id="studios">
-        <div class="studios-content">
-            <div class="studios-header">
-                <h2>Our Studios</h2>
-                <p>Experience world-class fitness facilities designed to elevate your performance. Each Body Zone studio offers state-of-the-art equipment, expert trainers, and an environment built for results.</p>
-            </div>
-            <div class="studios-grid">
-                <div class="studio-card">
-                    <div class="studio-image">💪</div>
-                    <div class="studio-content">
-                        <h3>Body Zone Downtown</h3>
-                        <p class="location">📍 123 Main Street, Downtown</p>
-                        <p>Our flagship location featuring premium equipment, HIIT studios, and personalized training programs.</p>
-                        <button class="studio-btn">Book a Class</button>
-                    </div>
-                </div>
-                <div class="studio-card">
-                    <div class="studio-image">🏋️</div>
-                    <div class="studio-content">
-                        <h3>Body Zone Westside</h3>
-                        <p class="location">📍 456 West Avenue, Westside</p>
-                        <p>A spacious facility focused on strength training, powerlifting, and functional fitness.</p>
-                        <button class="studio-btn">Book a Class</button>
-                    </div>
-                </div>
-                <div class="studio-card">
-                    <div class="studio-image">🧘</div>
-                    <div class="studio-content">
-                        <h3>Body Zone Wellness Center</h3>
-                        <p class="location">📍 789 Wellness Blvd, Eastside</p>
-                        <p>Our holistic wellness hub offering yoga, pilates, meditation, and recovery sessions.</p>
-                        <button class="studio-btn">Book a Class</button>
-                    </div>
                 </div>
             </div>
         </div>
