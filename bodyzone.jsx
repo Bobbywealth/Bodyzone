@@ -245,10 +245,140 @@ export default function BodyZone() {
         </div>
       </section>
 
+      {/* Studios Section */}
+      <section id="studios" className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl text-[#C9A063] mb-6 font-normal">Our Studios</h2>
+            <p className="text-gray-600 leading-relaxed text-base max-w-2xl mx-auto">
+              Experience world-class fitness facilities designed to elevate your performance. Each Body Zone studio offers state-of-the-art equipment, expert trainers, and an environment built for results.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { icon: '💪', name: 'Body Zone Downtown', location: '123 Main Street, Downtown', desc: 'Our flagship location featuring premium equipment, HIIT studios, and personalized training programs.' },
+              { icon: '🏋️', name: 'Body Zone Westside', location: '456 West Avenue, Westside', desc: 'A spacious facility focused on strength training, powerlifting, and functional fitness.' },
+              { icon: '🧘', name: 'Body Zone Wellness Center', location: '789 Wellness Blvd, Eastside', desc: 'Our holistic wellness hub offering yoga, pilates, meditation, and recovery sessions.' }
+            ].map((studio, idx) => (
+              <div key={idx} className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2" style={{ animation: `fadeInUp 0.8s ease-out ${(idx + 1) * 0.1}s backwards` }}>
+                <div className="h-48 bg-gradient-to-br from-[#C9A063] to-[#B88F50] flex items-center justify-center text-6xl text-white">
+                  {studio.icon}
+                </div>
+                <div className="p-6">
+                  <h3 className="font-['Cormorant_Garamond'] text-2xl text-gray-800 mb-2">{studio.name}</h3>
+                  <p className="text-[#C9A063] text-sm mb-4 flex items-center gap-2">📍 {studio.location}</p>
+                  <p className="text-gray-600 leading-relaxed text-sm mb-6">{studio.desc}</p>
+                  <button className="px-6 py-3 border-2 border-[#C9A063] text-[#C9A063] rounded-full text-sm font-medium tracking-wide hover:bg-[#C9A063] hover:text-white transition-all duration-300">
+                    Book a Class
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Product Details Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-[#F8F6F3]">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl text-[#C9A063] mb-8 font-normal">Our Products</h2>
+            <p className="text-gray-600 leading-relaxed text-base max-w-2xl mx-auto">Scientifically formulated. Intentionally refined. Designed to support your body's optimal performance.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: 'Ultimate Greens', subtitle: '+Antioxidants', desc: 'A nutrient-dense greens powder containing vitamins, minerals, wheat grass, spirulina, alfalfa grass and a variety of fruits and vegetables to provide a diverse nutrient profile.', features: ['Over 30 ingredients for healthy living', 'Mixed berry flavor', 'Supports overall wellness and vitality', 'Rich in antioxidants'] },
+              { name: 'Ultimate Cleanse', subtitle: '15-Day Premium Quality', desc: 'A refined daily cleanse designed to support a balanced, sculpted appearance from the inside out. Formulated to help the body reset and reduce excess water retention.', features: ['Supports a refined waistline', 'Reduces bloating & water retention', 'Supports skin smoothness & elasticity', 'Metabolic support'] },
+              { name: 'ZoneFuel', subtitle: 'Prime Hydration', desc: 'A premium electrolyte formula designed to support optimal hydration, endurance, and daily performance. Replenishes essential electrolytes while supporting energy metabolism.', features: ['Essential electrolytes: Calcium, Magnesium, Sodium, Potassium', 'Vitamins C, B6, and B12', 'Lemon lime flavor', 'No artificial additives'] },
+              { name: 'Collagen Peptides', subtitle: 'Type I & III', desc: 'Premium, unflavored collagen formula sourced from grass-fed bovine collagen. Hydrolyzed for optimal absorption to support structure, strength, and body integrity.', features: ['9g protein per serving', 'Supports skin resilience', 'Joint comfort & recovery', 'Unflavored - mixes with anything'] }
+            ].map((product, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
+                <h3 className="font-['Cormorant_Garamond'] text-2xl text-[#B88F50] mb-2">{product.name}</h3>
+                <h4 className="text-[#C9A063] text-xs uppercase tracking-wider mb-4">{product.subtitle}</h4>
+                <p className="text-gray-600 leading-relaxed text-sm mb-6">{product.desc}</p>
+                <ul className="space-y-3">
+                  {product.features.map((feature, i) => (
+                    <li key={i} className="text-gray-600 text-sm flex items-start gap-3">
+                      <span className="text-[#C9A063] text-lg">✦</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-white">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl text-[#C9A063] mb-12 font-normal">Why Body Zone</h2>
+          <p className="text-gray-700 leading-relaxed text-base max-w-3xl mx-auto mb-16">
+            Body Zone is built on the principles of balance, intention, and elevated living. We believe the body performs best when supported holistically—through mindful intake, daily movement, and disciplined routines.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { title: 'Premium Formulation', desc: 'Every product is scientifically formulated with the highest quality ingredients, tested for purity and potency.' },
+              { title: 'Clean & Transparent', desc: 'No fillers, no shortcuts, no compromises. Just pure, effective ingredients that work.' },
+              { title: 'Designed for Results', desc: 'Not about trends or quick fixes—its about consistency, control, and showing up in your best form.' },
+              { title: 'Unisex & Inclusive', desc: 'Minimal, purpose-driven products designed for everyone committed to elevated wellness.' }
+            ].map((benefit, idx) => (
+              <div key={idx} className="text-center p-6">
+                <h3 className="font-['Cormorant_Garamond'] text-2xl text-gray-800 mb-4">{benefit.title}</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">{benefit.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-[#F8F6F3] to-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl text-[#C9A063] mb-6 font-normal">What Our Customers Say</h2>
+            <p className="text-gray-600 leading-relaxed text-base max-w-2xl mx-auto">Real stories from real people who have transformed their wellness journey with Body Zone.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              { name: 'Marcus Johnson', product: 'Ultimate Greens User', initials: 'MJ', text: 'Ultimate Greens has completely changed my morning routine. I feel more energized throughout the day and my immune system has never been stronger. Highly recommend!' },
+              { name: 'Sarah Chen', product: 'Ultimate Cleanse User', initials: 'SC', text: 'The 15-day cleanse was exactly what I needed. I feel lighter, more focused, and have established healthier eating habits that stick. Amazing product!' },
+              { name: 'David Rodriguez', product: 'ZoneFuel User', initials: 'DR', text: 'ZoneFuel is my go-to during intense training sessions. No cramps, no jitters, just pure hydration and endurance. Best electrolyte supplement I have ever used.' },
+              { name: 'Emily Watson', product: 'Collagen User', initials: 'EW', text: 'Collagen Peptides has visibly improved my skin and joint health. I add it to my morning coffee and do not even taste it. Will definitely repurchase!' },
+              { name: 'James Thompson', product: 'Studio Member', initials: 'JT', text: 'The combination of these supplements with my training has taken my performance to the next level. Body Zone products are now an essential part of my daily routine.' },
+              { name: 'Aisha Patel', product: 'Bundle User', initials: 'AP', text: 'Clean, effective, and great tasting. I love that there are no artificial additives. Finally a supplement brand I trust with my health.' }
+            ].map((testimonial, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-2" style={{ animation: `fadeInUp 0.8s ease-out ${(idx + 1) * 0.1}s backwards` }}>
+                <div className="flex gap-1 mb-4">
+                  {[1,2,3,4,5].map((star, i) => (
+                    <span key={i} className="text-[#C9A063] text-xl">★</span>
+                  ))}
+                </div>
+                <p className="text-gray-600 leading-relaxed text-sm mb-6 italic">"{testimonial.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#C9A063] to-[#B88F50] flex items-center justify-center text-white font-['Cormorant_Garamond'] font-medium">
+                    {testimonial.initials}
+                  </div>
+                  <div>
+                    <h4 className="font-['Cormorant_Garamond'] text-lg text-gray-800">{testimonial.name}</h4>
+                    <p className="text-[#C9A063] text-xs">{testimonial.product}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section className="py-16 md:py-24 px-4 md:px-8 lg:px-16 bg-white" id="about">
         <div className="max-w-4xl mx-auto text-center mb-16">
-          <h2 className="font-['Cormorant_Garamond'] text-5xl text-[#C9A063] mb-8 font-normal">About Body Zone</h2>
+          <h2 className="font-['Cormorant_Garamond'] text-4xl md:text-5xl text-[#C9A063] mb-8 font-normal">About Body Zone</h2>
           <div className="space-y-6 text-gray-700 leading-relaxed text-base">
             <p>Body Zone is a high-end wellness brand built around balance, intention, and elevated living. We believe the body performs and presents best when it's supported holistically—through mindful intake, daily movement, and disciplined routines.</p>
             <p>Our products are designed to integrate seamlessly into a modern lifestyle, supporting tone, structure, and overall vitality without extremes or quick fixes. Every detail—from formulation to design—is intentional, refined, and uncompromising in quality.</p>
@@ -257,7 +387,7 @@ export default function BodyZone() {
           </div>
         </div>
         
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mt-20">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mt-20" id="system">
           {[
             { icon: '✦', title: 'Premium Quality', desc: 'Scientifically formulated supplements crafted with the highest quality ingredients to support your wellness journey from the inside out.', delay: 0.2 },
             { icon: '◈', title: 'Expert Guidance', desc: 'Access world-class fitness studios and expert trainers who understand your unique goals and help you achieve peak performance.', delay: 0.4 },
@@ -275,7 +405,7 @@ export default function BodyZone() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#2C2C2C] text-[#F8F6F3] px-4 md:px-8 lg:px-16 py-12" role="contentinfo">
+      <footer className="bg-[#2C2C2C] text-[#F8F6F3] px-4 md:px-8 lg:px-16 py-12" role="contentinfo" id="contact">
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-8">
           {[
             { title: 'Shop', links: ['Supplements', 'Bundles', 'Accessories', 'Gift Cards'] },
